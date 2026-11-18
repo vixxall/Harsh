@@ -1,0 +1,148 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import 'leaflet/dist/leaflet.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, 'Times New Roman', serif;
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+}
+
+/* Dark heritage theme is the default */
+:root {
+  color-scheme: dark;
+  --background: oklch(0.17 0.012 60);
+  --foreground: oklch(0.94 0.012 80);
+  --card: oklch(0.21 0.014 55);
+  --card-foreground: oklch(0.94 0.012 80);
+  --popover: oklch(0.19 0.014 55);
+  --popover-foreground: oklch(0.94 0.012 80);
+  --primary: oklch(0.78 0.13 75);
+  --primary-foreground: oklch(0.2 0.03 60);
+  --secondary: oklch(0.27 0.02 55);
+  --secondary-foreground: oklch(0.92 0.012 80);
+  --muted: oklch(0.25 0.016 55);
+  --muted-foreground: oklch(0.72 0.02 70);
+  --accent: oklch(0.5 0.13 32);
+  --accent-foreground: oklch(0.96 0.012 80);
+  --destructive: oklch(0.58 0.2 28);
+  --border: oklch(0.4 0.03 65 / 30%);
+  --input: oklch(0.4 0.03 65 / 25%);
+  --ring: oklch(0.78 0.13 75);
+  --gold: oklch(0.78 0.13 75);
+  --gold-soft: oklch(0.85 0.09 80);
+  --radius: 0.625rem;
+}
+
+.light {
+  color-scheme: light;
+  --background: oklch(0.97 0.012 80);
+  --foreground: oklch(0.24 0.02 55);
+  --card: oklch(0.995 0.006 85);
+  --card-foreground: oklch(0.24 0.02 55);
+  --popover: oklch(0.995 0.006 85);
+  --popover-foreground: oklch(0.24 0.02 55);
+  --primary: oklch(0.58 0.12 62);
+  --primary-foreground: oklch(0.99 0.006 85);
+  --secondary: oklch(0.92 0.016 78);
+  --secondary-foreground: oklch(0.28 0.02 55);
+  --muted: oklch(0.93 0.014 78);
+  --muted-foreground: oklch(0.48 0.02 60);
+  --accent: oklch(0.52 0.14 32);
+  --accent-foreground: oklch(0.99 0.006 85);
+  --destructive: oklch(0.58 0.2 28);
+  --border: oklch(0.5 0.03 65 / 22%);
+  --input: oklch(0.5 0.03 65 / 20%);
+  --ring: oklch(0.58 0.12 62);
+  --gold: oklch(0.62 0.12 62);
+  --gold-soft: oklch(0.7 0.1 68);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif;
+  }
+}
+
+@layer utilities {
+  .text-gold {
+    color: var(--gold);
+  }
+  .bg-hero-grad {
+    background:
+      radial-gradient(ellipse at top, oklch(0.28 0.04 55 / 0.9), transparent 60%),
+      linear-gradient(180deg, oklch(0.14 0.012 55), oklch(0.18 0.014 60));
+  }
+  .heritage-border {
+    border-image: linear-gradient(90deg, transparent, var(--gold), transparent) 1;
+  }
+  .fade-up {
+    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Leaflet dark cohesion */
+.leaflet-container {
+  background: oklch(0.2 0.014 55);
+  font-family: var(--font-sans);
+}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--card);
+  color: var(--card-foreground);
+}
+.leaflet-bar a {
+  background: var(--card);
+  color: var(--foreground);
+  border-color: var(--border);
+}
